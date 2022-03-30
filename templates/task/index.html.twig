@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Task index{% endblock %}
+{% block activetask %}active{% endblock %}
+{% block h1 %}Gestion des taches{% endblock %}
+{% block brcr %}Gestion des taches{% endblock %}
+{% block section %}
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-12">
+                    <h3 class="card-title  float-left">Task </h3>
+                    <a type="button" class="btn btn-info btn-lg  float-right"  href="{{ path('app_task_new') }}">Create new</a>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+            <table id="example2" class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for task in tasks %}
+                    <tr>
+                        <td>{{ task.taskName }}</td>
+                        <td>{{ task.category }}</td>
+                        <td>
+                            <a class="btn btn-info btn-sm " href="{{ path('app_task_show', {'id': task.id}) }}">Show</a>
+                            <a class="btn btn-info btn-sm " href="{{ path('app_task_edit', {'id': task.id}) }}">Edit</a>
+                            {{ include('task/_delete_form.html.twig') }}
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="6">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <!-- /.card-body -->
+    </div>
+        </tbody>
+    </table>
+
+    {% endblock %}
+
+

@@ -1,0 +1,4 @@
+<form class="btn p-0"  method="post" action="{{ path('app_gt_user_delete', {'id': gt_user.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ gt_user.id) }}">
+    <button class="btn btn-danger btn-sm">Delete</button>
+</form>

@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Task{% endblock %}
+{% block activetask %}active{% endblock %}
+{% block section %}
+
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">{{ task.taskName }} {{ task.isDone ? '<span class="right badge badge-primary">Done</span>' : '<span class="right badge badge-danger">Not Yet</span>' }} </h3>
+
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <div class="card-body">
+            {{ task.taskDescription }}
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer">
+            <a class="btn btn-info btn-sm "href="{{ path('app_task_index') }}">back to list</a>
+
+            <a class="btn btn-info btn-sm " href="{{ path('app_task_edit', {'id': task.id}) }}">edit</a>
+
+            {{ include('task/_delete_form.html.twig') }}
+        </div>
+        <!-- /.card-footer-->
+    </div>
+    <!-- /.card -->
+
+
+
+{% endblock %}

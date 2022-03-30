@@ -1,0 +1,164 @@
+
+{% extends 'base.html.twig' %}
+{#
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Hello {{ controller_name }}! ✅</h1>
+
+    This friendly message is coming from:
+    <ul>
+        <li>Your controller at <code><a href="{{ 'C:/Users/hp/PhpstormProjects/GestionTache/GestionTache/src/Controller/AdminController.php'|file_link(0) }}">src/Controller/AdminController.php</a></code></li>
+        <li>Your template at <code><a href="{{ 'C:/Users/hp/PhpstormProjects/GestionTache/GestionTache/templates/admin/user.html.twig'|file_link(0) }}">templates/admin/user.html.twig</a></code></li>
+    </ul>
+</div>
+{% endblock %}
+#}
+{% block title %}Gestion Tache | Dashboard{% endblock %}
+{% block activedash %}active{% endblock %}
+{% block section %}
+    <div class="container-fluid">
+        <!-- Info boxes -->
+        <div class="row">
+            <!-- /.col -->
+            <div class="col-12 col-sm-6 col-md-3">
+                <div class="info-box mb-3">
+                    <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
+
+                    <div class="info-box-content">
+                        <span class="info-box-text">Users</span>
+                        <span class="info-box-number">{{ members }}</span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+
+        <!-- Main row -->
+        <div class="row">
+            <!-- Left col -->
+            <div class="col-md-8">
+                <!-- MAP & BOX PANE -->
+                        <!-- USERS LIST -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Free User List </h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body p-0">
+                                <ul class="users-list clearfix">
+                                    {% for user in users %}
+                                    <li>
+                                        <img src="{{ img_folder }}/{{ user.gtImage }}" alt="User Image" style="width: 75px;height: 60px">
+                                        <a class="users-list-name" href="{{ path('app_gt_user_dispatch', {'id': user.id}) }}">{{ user.fullName }}</a>
+                                        <span class="users-list-date">{{ user.category }}</span>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                                <!-- /.users-list -->
+                            </div>
+                            <!-- /.card-body -->
+                            <div class="card-footer text-center">
+
+                            </div>
+                            <!-- /.card-footer -->
+                        </div>
+                        <!--/.card -->
+                <!-- TABLE: task-->
+                <div class="card">
+                    <div class="card-header border-transparent">
+                        <h3 class="card-title">Task List</h3>
+
+
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table m-0">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Status</th>
+                                    <th>Category</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for task in tasks %}
+                                <tr>
+                                    <td><a href="">{{ task.id }}</a></td>
+                                    <td>{{ task.taskName }}</td>
+                                    <td><span class="badge badge-danger">Not Yet</span></td>
+                                    <td>
+                                        {{ task.category }}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.table-responsive -->
+                    </div>
+                    <!-- /.card-body -->
+                    <div class="card-footer clearfix">
+                        <a href="{{ path('app_task_new') }}" class="btn btn-sm btn-info float-left">Create New Task</a>
+                        <a href="{{ path('app_task_index') }}" class="btn btn-sm btn-secondary float-right">View All Task</a>
+                    </div>
+                    <!-- /.card-footer -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+
+            <div class="col-md-4">
+                <!-- task done LIST -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Pending Task</h3>
+
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body p-0">
+                        <ul class="products-list product-list-in-card pl-2 pr-2">
+                            {% for pendingTask in pendingTasks %}
+                            <li class="item">
+                                <div class="product-img">
+                                    <img src="{{ img_folder }}/{{ pendingTask.user.gtImage }}" alt="Product Image" class="img-size-50 rounded-circle">
+                                </div>
+                                <div class="product-info">
+                                    <a href="javascript:void(0)" class="product-title">{{ pendingTask.taskName }}
+                                        <span class="badge badge-warning float-right">4h</span></a>
+                                    <span class="product-description">
+                                        {{ pendingTask.taskDescription }}
+                                    </span>
+                                </div>
+                            </li>
+                            {% endfor %}
+                            <!-- /.item -->
+                        </ul>
+                    </div>
+                    <!-- /.card-body -->
+                    <div class="card-footer text-center">
+                        <a href="{{ path('app_task_index') }}" class="uppercase">View All Task</a>
+                    </div>
+                    <!-- /.card-footer -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div><!--/. container-fluid -->
+{% endblock %}
+
